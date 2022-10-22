@@ -36,37 +36,29 @@ export default function Bookmarkmanager() {
           allBookmark && allBookmark.length > 0 && allBookmark.map((bookmarkValue) => {
             return <>{
               // handleCheckDuplicate(bookmarkValue.category) ? "" :
-                <Card
-                  style={{
-                    width: '38rem', margin: "auto", marginBottom: "15px"
-                  }}
-                >
-                  {/* {
-                  console.log("categoryValueDuplicate.includes(bookmarkValue.category)",categoryValueDuplicate.includes(bookmarkValue.category))
-                }
-                {
-                  console.log("categoryValueDuplicate",categoryValueDuplicate)
-                }
-                {
-                  console.log("bookmarkValue.category",bookmarkValue.category)
-                } */}
-                  <CardHeader>{bookmarkValue.category}</CardHeader>
-                  <ListGroup flush>
+              <Card
+                style={{
+                  width: '38rem', margin: "auto", marginBottom: "15px"
+                }}
+              >
 
-                    {
-                      handleFilter(bookmarkValue.category).map((filterValue) => {
-                        return <>
-                          <ListGroupItem>{filterValue.title}
-                            <Link href={`/bookmark_details/${bookmarkValue.serial}`}>
-                              <a><Button color="primary" style={{ marginLeft: "50px" }}>Details</Button></a>
-                            </Link>
-                          </ListGroupItem>
-                        </>
-                      })
-                    }
-                  </ListGroup>
+                <CardHeader>{bookmarkValue.category}</CardHeader>
+                <ListGroup flush>
 
-                </Card>
+                  {
+                    handleFilter(bookmarkValue.category).map((filterValue) => {
+                      return <>
+                        <ListGroupItem>{filterValue.title}
+                          <Link href={`/bookmark_details/${bookmarkValue.serial}`}>
+                            <a><Button color="primary" style={{ marginLeft: "50px" }}>Details</Button></a>
+                          </Link>
+                        </ListGroupItem>
+                      </>
+                    })
+                  }
+                </ListGroup>
+
+              </Card>
             }
             </>
           })
