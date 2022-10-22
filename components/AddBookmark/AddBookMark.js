@@ -6,6 +6,7 @@ export default function AddBookMark() {
 
     const [allCategory, setAllCategory] = useState([])
     const [error, setError] = useState(false)
+    const [validUrl, setValidUrl] = useState(false)
 
     const [formData, setFormData] = useState({
         title: "",
@@ -18,7 +19,20 @@ export default function AddBookMark() {
     }, [])
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value })
+        if(e.target.name == "link"){
+            var regexp = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/
+            ;
+            if (e.target.value != "") {
+                if (!regexp.test(e.target.value)) {
+                    setValidUrl(true)
+                } else {
+                    setValidUrl(false)
+                    setFormData({ ...formData, [e.target.name]: e.target.value })
+                }
+            }
+        }else{
+            setFormData({ ...formData, [e.target.name]: e.target.value })
+        }
     }
 
 
@@ -83,7 +97,11 @@ export default function AddBookMark() {
               error &&  formData.link == "" && <p style={{color:"red"}}>link Is Required</p>
             }
             {
-              error &&  formData.category == "" && <p style={{color:"red"}}>cCtegory Is Required</p>
+              error &&  formData.category == "" && <p style={{color:"red"}}>Ctegory Is Required</p>
+            }
+            {
+              validUrl &&   <p style={{color:"red"}}>validUrl Is Required</p>
+              
             }
 
             <Row style={{ margin: "20px" }}>
@@ -95,7 +113,7 @@ export default function AddBookMark() {
                             onChange={handleChange}
                             placeholder="please input a title"
                             type="text"
-                            max="30"
+                            maxlength="30"
                         />
                     </Col>
                     <Col sm={6}>
@@ -103,7 +121,7 @@ export default function AddBookMark() {
                             name="link"
                             onChange={handleChange}
                             placeholder="please input a link"
-                            type="text"
+                            type="url"
                         />
                     </Col>
                 </Row>
