@@ -32,7 +32,7 @@ export default function Bookmarkmanager() {
   return (
     <>
       <div style={{ margin: "30px" }}>
-        {
+        {allBookmark  ?
           allBookmark && allBookmark.length > 0 && allBookmark.map((bookmarkValue) => {
             return <>{
               // handleCheckDuplicate(bookmarkValue.category) ? "" :
@@ -62,7 +62,8 @@ export default function Bookmarkmanager() {
             }
             </>
           })
-
+       :
+       <p>No Book Mark Added</p>
         }
       </div>
     </>
